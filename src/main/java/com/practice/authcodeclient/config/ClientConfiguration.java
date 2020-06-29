@@ -32,7 +32,7 @@ public class ClientConfiguration {
         resourceDetails.setId("oauth2server");
         resourceDetails.setTokenName("oauth_token");
         resourceDetails.setClientId("clientapp");
-        resourceDetails.setClientSecret("123456");
+        resourceDetails.setClientSecret("{noop}123456");
         resourceDetails.setAccessTokenUri("http://localhost:8080/oauth/token");
         resourceDetails.setUserAuthorizationUri("http://localhost:8080/oauth/authorize");
         resourceDetails.setScope(Arrays.asList("read_profile"));

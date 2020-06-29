@@ -39,12 +39,29 @@ public class OAuth2ClientTokenService implements ClientTokenServices {
 
     @Override
     public void saveAccessToken(OAuth2ProtectedResourceDetails oAuth2ProtectedResourceDetails, Authentication authentication, OAuth2AccessToken oAuth2AccessToken) {
+        Calendar expirationDate = Calendar.getInstance();
+        expirationDate.setTime(oAuth2AccessToken.getExpiration());
 
+        Optional<ClientUser> optionalClientUser = getClientUser(authentication);
+
+        if(optionalClientUser.isPresent()){
+            ClientUser clientUser = optionalClientUser.get();
+            clientUser.setAccessToken(oAuth2AccessToken.getValue());
+            clientUser.setAccessTokenValidity(expirationDate);
+            clientUserRepository.save(clientUser);
+        }
     }
 
     @Override
     public void removeAccessToken(OAuth2ProtectedResourceDetails oAuth2ProtectedResourceDetails, Authentication authentication) {
-
+        Optional<ClientUser> optionalClientUser = getClientUser(authentication);
+        if(optionalClientUser.isPresent()){
+            ClientUser clientUser = optionalClientUser.get();
+            clientUser.setAccessToken(null);
+            clientUser.setRefreshToken(null);
+            clientUser.setAccessTokenValidity(null);
+            clientUserRepository.save(clientUser);
+        }
     }
 
     private Optional<ClientUser> getClientUser(Authentication authentication){
