@@ -19,7 +19,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<!-- Swagger -->
-		<io.springfox-version>2.6.1</io.springfox-version>
+		<io.springfox-version>2.10.0</io.springfox-version>
 	</properties>
 
 	<dependencies>
